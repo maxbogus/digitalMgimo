@@ -151,7 +151,12 @@ export function LoginPage() {
 								})
 							}
 						>
-							<img src="/favicon.svg" alt="" aria-hidden="true" className="size-5 rounded" />
+							<img
+								src={`${import.meta.env.BASE_URL}favicon.svg`}
+								alt=""
+								aria-hidden="true"
+								className="size-5 rounded"
+							/>
 							Войти через Госуслуги
 							<Badge variant="outline">заглушка</Badge>
 						</Button>
