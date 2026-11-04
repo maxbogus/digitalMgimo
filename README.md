@@ -98,13 +98,17 @@ src/
 ## Тесты и качество
 
 ```bash
-make test            # Vitest (20 тестов)
+make test            # Vitest (40 тестов)
 make test-coverage   # покрытие
 make lint            # ESLint 9 + jsx-a11y
 make format-check    # Prettier
 make type-check      # tsc --noEmit
 make ci-critical     # то, что гоняет pre-push
 ```
+
+Покрытие: 53 % строк в целом, `app/store` — 80 %, `shared/ui` — 73 %,
+`pages` — 28 % (экраны покрыты рендер-тестами главного сценария). Критичная
+логика — даты, статусы заявок, каналы уведомлений — покрыта полностью.
 
 Проверено вручную в Chromium (Playwright):
 
