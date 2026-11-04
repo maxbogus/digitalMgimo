@@ -61,7 +61,7 @@ export function ProfilePage() {
 				}
 			/>
 
-			<div className="grid gap-4 lg:grid-cols-[1.05fr_1fr]">
+			<div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.05fr_1fr]">
 				<div className="flex min-w-0 flex-col gap-4">
 					<Card>
 						<CardContent className="flex flex-col gap-4">

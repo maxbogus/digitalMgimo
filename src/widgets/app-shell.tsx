@@ -57,7 +57,9 @@ export function AppShell() {
 						<BrandMark />
 						<span className="flex flex-col leading-tight">
 							<span className="text-[15px] font-bold tracking-tight">Цифровой деканат</span>
-							<span className="text-muted-foreground text-[11px]">МГИМО · демо-прототип</span>
+							<span className="text-muted-foreground text-[11px]">
+								МГИМО · демо-прототип · не официальный сервис
+							</span>
 						</span>
 					</Link>
 

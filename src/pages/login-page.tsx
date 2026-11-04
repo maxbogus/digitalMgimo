@@ -44,8 +44,8 @@ export function LoginPage() {
 	};
 
 	return (
-		<div className="grid min-h-dvh lg:grid-cols-[1.05fr_1fr]">
-			<section className="mesh-soft relative flex flex-col justify-between overflow-hidden px-5 py-8 sm:px-10 lg:py-12">
+		<div className="grid min-h-dvh grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
+			<section className="mesh-soft relative flex min-w-0 flex-col justify-between overflow-hidden px-5 py-8 sm:px-10 lg:py-12">
 				<div className="flex items-center gap-3">
 					<span className="bg-brand shadow-card grid size-11 place-items-center rounded-2xl text-white">
 						<Landmark className="size-5" aria-hidden="true" />
@@ -53,6 +53,7 @@ export function LoginPage() {
 					<div className="leading-tight">
 						<p className="text-[15px] font-bold">Цифровой деканат</p>
 						<p className="text-muted-foreground text-xs">МГИМО · демо-прототип</p>
+						<p className="text-muted-foreground text-[11px]">не официальный сервис</p>
 					</div>
 				</div>
 

@@ -106,7 +106,7 @@ export function AccessMap() {
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 pt-3">
 				<div
-					className="overflow-x-auto"
+					className="relative min-w-0 overflow-x-auto"
 					role="region"
 					aria-label="Матрица доступа к данным"
 					tabIndex={0}
