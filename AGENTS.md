@@ -50,6 +50,11 @@ src/
 │   ├── lib/             # cn, dates, confetti, use-now
 │   └── ui/              # дизайн-система: button, card, badge, sheet, toast, mascot…
 └── styles/globals.css   # токены, шрифт, утилиты теней, reduced-motion
+
+slides/                  # презентация reveal.js (публикуется как /slides/)
+docs/handout/            # PDF описания, PDF деки, скриншоты (публикуются как /handout/)
+docs/process/            # R-07/R-08/R-09 — ЛОКАЛЬНО, вне git
+scripts/                 # сборка артефактов и проверки (см. §3)
 ```
 
 **Направление зависимостей:** `pages → widgets → entities → shared`.
@@ -68,6 +73,11 @@ src/
 | Типы                    | `make type-check`                                                   |
 | Линт / формат           | `make lint` · `make lint-fix` · `make format` · `make format-check` |
 | Тесты                   | `make test` · `make test-coverage`                                  |
+| Python-тесты скриптов   | `make py-test` (unittest)                                           |
+| Документация            | `make docs-check`                                                   |
+| Скриншоты               | `make screens` (Playwright, 20 снимков)                             |
+| PDF описания процесса   | `make handout` + `make facts-check`                                 |
+| PDF презентации         | `make build` → `make deck`                                          |
 | Полный гейт             | `make check`                                                        |
 | Быстрый гейт (pre-push) | `make ci-critical`                                                  |
 | Секреты                 | `make secrets-scan`                                                 |
@@ -86,6 +96,8 @@ src/
 | Демо-данные           | `src/shared/api/mock.ts`                 | типы в `src/shared/api/types.ts`                |
 | Границы прототипа     | `README.md` § «Что реализовано»          | сверка с MoSCoW во внутреннем ТЗ                |
 | Тесты                 | `tests/unit/**`                          | `make test`                                     |
+| Числа в документах    | `docs/handout/facts.toml`                | `make facts-check` (сверка с PDF)               |
+| Слайды                | `slides/index.html`                      | `make build` → `/slides/`                       |
 
 ---
 
@@ -100,6 +112,8 @@ src/
 | `/requests`      | заявки, трекер, форма в 3 шага               | Must/Should |
 | `/notifications` | 3 приоритета + каналы                        | Must        |
 | `/profile`       | профиль, «Кто что видит», настройки демо     | Should      |
+| `/slides/`       | презентация reveal.js (статика, не SPA)      | —           |
+| `/handout/*.pdf` | описание процесса и дека в PDF               | —           |
 
 Доступ: `RequireAuth` в `src/app/app.tsx`. Сессия хранится в zustand+localStorage.
 Чужие заявки недоступны: селекторы фильтруют по `studentId` из сессии.
@@ -132,6 +146,19 @@ src/
     Ручной перезапуск: `gh workflow run pages.yml --ref master`.
 11. **Сетки с длинным текстом.** У грид-элементов с карточками обязателен `min-w-0`,
     иначе на 320 px появляется горизонтальный скролл (проверка — Playwright).
+12. **Неявная grid-колонка и `sr-only`.** `grid` без `grid-cols-*` создаёт колонку
+    `auto`, которая тянется по max-content: страница становится шире вьюпорта
+    (так `/login` давал 375 px, `/profile` — 535 px). Всегда `grid-cols-1` плюс
+    явная сетка на `lg`. Отдельно: контейнер с `overflow-x-auto` **не** клиппит
+    абсолютно позиционированные `sr-only`-спаны, если их содержащий блок выше
+    клиппера — нужен `relative`. Проверка — измерение `scrollWidth` на 320/360 px.
+13. **Что публикуется, а что нет.** `slides/` и `docs/handout/` попадают в `dist/`,
+    то есть публичны; `docs/process/` (описание процесса, цитаты из закрытого ТЗ,
+    выгрузки истории агента) — в `.gitignore`. Не переносить текст из `docs/process/`
+    в публичные файлы без курации.
+14. **Числа в PDF — только из реестра.** `docs/handout/facts.toml` хранит значение
+    и команду воспроизведения, `make facts-check` падает при расхождении. Новое
+    число в документе без записи в реестре — дефект (NFR-4).
 
 ---
 

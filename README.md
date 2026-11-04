@@ -104,6 +104,8 @@ make test-coverage   # покрытие
 make lint            # ESLint 9 + jsx-a11y
 make format-check    # Prettier
 make type-check      # tsc --noEmit
+make py-test         # тесты служебных скриптов (unittest, 14 тестов)
+make docs-check      # документация: ссылки, покрытие требований, статусы
 make ci-critical     # то, что гоняет pre-push
 ```
 
@@ -133,6 +135,32 @@ make ci-critical     # то, что гоняет pre-push
    а не показываем «магическую рекомендацию».
 3. **Разделение доступа.** Селекторы фильтруют заявки и уведомления по `studentId`
    из сессии: чужие данные не рендерятся даже при подстановке URL.
+
+## Артефакты сдачи
+
+Кроме прототипа собраны материалы, которые показывает жюри:
+
+| Что                     | Локально                        | На проде                    | Сборка         |
+| ----------------------- | ------------------------------- | --------------------------- | -------------- |
+| Описание процесса (PDF) | `docs/handout/description.pdf`  | `/handout/description.pdf`  | `make handout` |
+| Презентация             | `slides/index.html`             | `/slides/`                  | `make build`   |
+| Презентация (PDF, 16:9) | `docs/handout/presentation.pdf` | `/handout/presentation.pdf` | `make deck`    |
+| Скриншоты 320/360 px    | `docs/handout/img/`             | `/handout/img/`             | `make screens` |
+
+Как это устроено:
+
+- **Скриншоты** снимает Playwright с работающего приложения: 7 экранов × 320/360 px
+  и тёмная тема (`make screens` поднимает dev-сервер и гасит его сам).
+- **PDF описания** собирается из Markdown (`docs/process/`) через pandoc и печатается
+  headless-Chrome: титул, оглавление, приложение со скриншотами и таблица проверок.
+- **Числа в PDF проверяются автоматически:** реестр `docs/handout/facts.toml`
+  содержит значения и команды воспроизведения, `make facts-check` падает, если
+  документ разошёлся с кодом.
+- **Презентация** — reveal.js 6.0.2, вендоренный в `slides/` (работает офлайн,
+  шрифт Golos Text переиспользуется из `/fonts`). PDF печатается Playwright'ом,
+  потому что Chrome CLI игнорирует CSS `@page` и ломает 16:9.
+- Всё попадает в `dist/` плагином `staticExtras` в `vite.config.ts`, поэтому
+  `pages.yml` не пришлось менять: деплой по-прежнему один шаг.
 
 ## Деплой
 
