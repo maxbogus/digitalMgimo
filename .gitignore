@@ -21,6 +21,12 @@ coverage/
 .vscode/*
 !.vscode/extensions.json
 
+# ── Внутренняя документация: ведётся локально, в репозиторий не входит ──
+# Сырой дамп ТЗ, нормализованные требования и рабочие задачи.
+requirements.md
+docs/requirements/
+ai/tasks/
+
 # логи
 *.log
 npm-debug.log*

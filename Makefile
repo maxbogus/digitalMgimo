@@ -5,7 +5,7 @@
 SHELL := /bin/bash
 
 .PHONY: help install dev build preview lint lint-fix format format-check \
-	type-check test test-coverage check ci-critical secrets-scan hooks-install clean
+	type-check test test-coverage check ci-critical secrets-scan hooks-install docs-check clean
 
 help: ## Список целей
 > @grep -hE '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -44,8 +44,12 @@ test: ## Vitest (один прогон)
 test-coverage: ## Vitest с покрытием
 > yarn test:coverage
 
-check: ## Полный гейт: lint + format + types + tests
+check: ## Полный гейт: lint + format + types + tests + docs
 > yarn check
+> python3 scripts/check_docs.py
+
+docs-check: ## Проверка внутренней документации (локально; в CI — skip)
+> python3 scripts/check_docs.py
 
 ci-critical: ## Быстрый гейт (pre-push)
 > yarn ci-critical
