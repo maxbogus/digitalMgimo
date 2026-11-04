@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# pre-commit: секреты в staged-файлах + автоформат/линт изменённого.
+set -e
+
+if command -v gitleaks >/dev/null 2>&1; then
+  RESULT=$(gitleaks protect --staged --no-color 2>&1) || true
+  if echo "${RESULT}" | grep -qE '(URE|WRN)'; then
+    echo "❌ gitleaks нашёл потенциальные секреты в staged-файлах:"
+    echo "${RESULT}"
+    echo "Реальный секрет — ротировать. Ложное срабатывание — правка .gitleaks.toml."
+    exit 1
+  fi
+  echo "✓ gitleaks: чисто"
+else
+  echo "⚠ gitleaks не установлен — пропускаю"
+fi
+
+yarn fix:staged

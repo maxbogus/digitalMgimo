@@ -1,0 +1,28 @@
+# зависимости
+node_modules/
+.yarn/cache
+.yarn/install-state.gz
+
+# сборка и кэши
+dist/
+dist-ssr/
+coverage/
+*.local
+.vite/
+
+# окружение и секреты
+.env
+.env.*
+!.env.example
+
+# редакторы и ОС
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# логи
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

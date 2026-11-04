@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# pre-push: быстрый гейт (lint + format + types). Тесты — в полном гейте.
+set -e
+make ci-critical
