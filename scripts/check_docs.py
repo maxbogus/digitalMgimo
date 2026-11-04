@@ -28,6 +28,12 @@ REQUIRED_TASK_SECTIONS = (
 LINK_RE = re.compile(r'\[[^\]]*\]\(([^)\s]+)\)')
 REQ_RE = re.compile(r'\b((?:R|E)-\d{2})\b')
 
+#: Путь в обратных кавычках внутри секции «Affected Files».
+PATH_RE = re.compile(r'`((?:src|tests|scripts|docs|slides|public|\.github|\.husky)/[^`\s]+)`')
+
+#: Аннотации, которые встречаются рядом с путём и не являются его частью.
+PATH_SUFFIXES = (' (новый)', ' (локально)', ' (обновлён)', ' (правка)')
+
 errors: list[str] = []
 warnings: list[str] = []
 
@@ -95,6 +101,29 @@ def check_statuses(paths: list[Path]) -> None:
             continue
         if status == 'DONE' and '- [ ]' in text:
             warnings.append(f'{relative(path)}: DONE, но есть незакрытые критерии')
+        if status == 'DONE':
+            check_affected_files(path, text)
+
+
+def check_affected_files(path: Path, text: str) -> None:
+    """DONE-задача обязана ссылаться на существующие файлы.
+
+    Иначе статус врёт: задача закрыта, а экрана или документа нет. Глобы
+    и новые файлы из backlog-задач не проверяем — только то, что заявлено
+    как сделанное.
+    """
+    if '## Affected Files' not in text:
+        return
+    section = text.split('## Affected Files', 1)[1].split('\n## ', 1)[0]
+    for raw in PATH_RE.findall(section):
+        target = raw
+        for suffix in PATH_SUFFIXES:
+            target = target.replace(suffix, '')
+        target = target.split(' (')[0].strip()
+        if '*' in target or target.endswith('/'):
+            continue
+        if not (ROOT / target).exists():
+            errors.append(f'{relative(path)}: DONE, но файла нет → {target}')
 
 
 def main() -> int:
@@ -105,6 +134,7 @@ def main() -> int:
 
     requirement_docs = sorted(REQUIREMENTS.glob('*.md'))
     task_docs = sorted(TASKS.rglob('TASK-*.md'))
+    process_docs = sorted((ROOT / 'docs' / 'process').glob('*.md'))
     index_docs = [
         path
         for path in [TASKS / 'INDEX.md', *TASKS.glob('active/*.md'), *TASKS.glob('architecture/*.md')]
@@ -115,7 +145,7 @@ def main() -> int:
     if not task_docs:
         warnings.append('в ai/tasks нет ни одной задачи')
 
-    check_links(requirement_docs + index_docs + task_docs + public_docs)
+    check_links(requirement_docs + index_docs + task_docs + public_docs + process_docs)
     check_task_sections(task_docs)
     check_requirement_coverage(task_docs)
     check_statuses(task_docs)

@@ -1,0 +1,39 @@
+# Реестр чисел, которые попадают в публикуемое описание процесса.
+#
+# Правило (из vkrMgimo/docs/DEFENCE.md): число без команды воспроизведения
+# не произносится. `scripts/check_pdf_facts.py` падает, если значение из
+# этого файла не найдено в собранном PDF — значит, документ разошёлся с кодом.
+
+[[fact]]
+id = "tests"
+value = "40 тестов"
+command = "yarn test"
+note = "7 файлов, 40 тестов, все зелёные"
+
+[[fact]]
+id = "axe"
+value = "0 нарушений"
+command = "axe-core 4.10.2: 7 экранов × 2 темы, WCAG 2.1 AA"
+note = "проверка 2026-11-05"
+
+[[fact]]
+id = "overflow"
+value = "0 px"
+command = "Playwright: 7 маршрутов × 320/360 px, scrollWidth == clientWidth"
+note = "после исправления grid-колонок"
+
+[[fact]]
+id = "bundle"
+value = "183 КБ"
+command = "BASE_URL=/digitalMgimo/ yarn build"
+note = "главный бандл, gzip"
+
+[[fact]]
+id = "screens"
+value = "20 снимков"
+command = "python3 scripts/shoot_screens.py --base-url <url>"
+note = "7 экранов: 320/360 px + тёмная тема"
+
+# Значения, которых в PDF быть не должно: устаревшие формулировки.
+[stale]
+values = []

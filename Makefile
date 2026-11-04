@@ -5,7 +5,8 @@
 SHELL := /bin/bash
 
 .PHONY: help install dev build preview lint lint-fix format format-check \
-	type-check test test-coverage check ci-critical secrets-scan hooks-install docs-check clean
+	type-check test test-coverage check ci-critical secrets-scan hooks-install \
+	docs-check py-test screens handout facts-check deck clean
 
 help: ## Список целей
 > @grep -hE '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -46,10 +47,30 @@ test-coverage: ## Vitest с покрытием
 
 check: ## Полный гейт: lint + format + types + tests + docs
 > yarn check
+> python3 -m unittest scripts.test_parse_cline_history -v
 > python3 scripts/check_docs.py
 
-docs-check: ## Проверка внутренней документации (локально; в CI — skip)
+py-test: ## Python-тесты служебных скриптов (unittest)
+> python3 -m unittest scripts.test_parse_cline_history -v
+
+docs-check: ## Проверка документации: тесты скриптов + ссылки и покрытие
+> python3 -m unittest scripts.test_parse_cline_history -q
 > python3 scripts/check_docs.py
+
+screens: ## Скриншоты экранов для PDF и деки (Playwright) → docs/handout/img
+> @bash -c 'yarn dev --port 4321 >/tmp/dekanat-dev.log 2>&1 & pid=$$!; \
+>   trap "kill $$pid 2>/dev/null || true" EXIT; \
+>   for i in $$(seq 60); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 1; done; \
+>   python3 scripts/shoot_screens.py --base-url http://localhost:4321'
+
+handout: ## Описание процесса: HTML + PDF → docs/handout/description.pdf
+> python3 scripts/build_handout.py
+
+facts-check: ## Сверка PDF с реестром чисел (docs/handout/facts.toml)
+> python3 scripts/check_pdf_facts.py
+
+deck: ## PDF презентации → docs/handout/presentation.pdf (нужна сборка dist)
+> python3 scripts/build_deck_pdf.py
 
 ci-critical: ## Быстрый гейт (pre-push)
 > yarn ci-critical

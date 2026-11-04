@@ -27,8 +27,20 @@ requirements.md
 docs/requirements/
 ai/tasks/
 
+# ── Описание процесса (R-07/R-08/R-09) и выгрузки истории Cline ──
+# Здесь лежат цитаты из закрытого ТЗ и внутренних документов: публикуется
+# только собранный PDF (docs/handout) с выверенными фрагментами.
+docs/process/
+
+# Промежуточный HTML описания: ссылается на file:// и нужен только локально.
+docs/handout/description.html
+
 # логи
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# python-кэш служебных скриптов
+__pycache__/
+*.py[cod]

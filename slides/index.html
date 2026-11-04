@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+		<meta name="robots" content="noindex" />
+		<title>Цифровой деканат · МГИМО — презентация</title>
+		<meta
+			name="description"
+			content="Цифровой деканат МГИМО: прототип кабинета студента и процесс разработки с ИИ-агентом."
+		/>
+		<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+		<link rel="stylesheet" href="./vendor/reset.css" />
+		<link rel="stylesheet" href="./vendor/reveal.css" />
+		<link rel="stylesheet" href="./theme.css" />
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- 1. Титул -->
+				<section class="cover">
+					<div class="rule"></div>
+					<h1>Цифровой деканат</h1>
+					<p class="lead">
+						Один экран вместо пяти: расписание, успеваемость, заявки, уведомления и карта
+						компетенций. Прототип кабинета студента МГИМО.
+					</p>
+					<p class="small accent"><strong>maxbogus.github.io/digitalMgimo</strong></p>
+					<p class="small muted">
+						Госуслуги, 1С и ФИС ГИА — заглушки: показаны точки интеграции. Данные вымышленные.
+					</p>
+					<span class="disclaimer">демо-прототип · не официальный сервис</span>
+				</section>
+
+				<!-- 2. Проблема -->
+				<section>
+					<div class="rule"></div>
+					<h2>Что не работает сегодня</h2>
+					<div class="three grid">
+						<div class="card">
+							<h3>Данные разрознены</h3>
+							<p>
+								Расписание на одном сайте, оценки в другой системе, справки — через очередь или
+								бумажный деканат.
+							</p>
+						</div>
+						<div class="card">
+							<h3>Нет картины</h3>
+							<p>
+								Оценки есть, но непонятно «как у меня дела»: нет прогресса, рисков и связи дисциплин
+								с профессией.
+							</p>
+						</div>
+						<div class="card">
+							<h3>Статус не виден</h3>
+							<p>
+								Заявка уходит «в обработку» и исчезает: ни срока, ни ответственного, ни истории.
+							</p>
+						</div>
+					</div>
+					<p class="small muted" style="margin-top: 20px">
+						Итог: студент не понимает, что происходит сейчас и что делать дальше.
+					</p>
+				</section>
+
+				<!-- 3. Решение -->
+				<section>
+					<div class="rule"></div>
+					<h2>Четыре решения, которые меняют опыт</h2>
+					<div class="two grid">
+						<div class="card">
+							<h3>Лента «Сегодня»</h3>
+							<p>
+								Один экран: следующая пара с обратным отсчётом, дедлайны, изменения, статусы заявок.
+							</p>
+						</div>
+						<div class="card">
+							<h3>Заявка как трекинг</h3>
+							<p>
+								Статус, ответственный, срок и история — как у доставки. Бейдж «проверено» означает
+								подлинность документа.
+							</p>
+						</div>
+						<div class="card">
+							<h3>Карта компетенций</h3>
+							<p>
+								Дисциплина → навык → рыночный сигнал. У каждой связки указан источник и дата
+								словаря.
+							</p>
+						</div>
+						<div class="card">
+							<h3>«Кто что видит»</h3>
+							<p>
+								Матрица ролей: преподаватель не видит заявки, деканат не видит личную траекторию.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 4. Демо -->
+				<section>
+					<div class="rule"></div>
+					<h2>Демо: два аккаунта, пароли не нужны</h2>
+					<div class="two grid" style="align-items: start">
+						<div>
+							<ul class="clean">
+								<li><strong>Анна Ковалёва</strong> — 2 курс, МЭО, группа МЭО-2-14</li>
+								<li><strong>Тимур Ахметов</strong> — 3 курс, МО, группа МО-3-08</li>
+								<li>Тёмная тема и режим демо-сбоев — в профиле</li>
+							</ul>
+							<p class="small muted" style="margin-top: 18px">
+								Ошибки сети имитируются намеренно: нужно показать состояния загрузки, ошибки и
+								повтора, а не только «счастливый путь».
+							</p>
+							<p class="small accent"><strong>maxbogus.github.io/digitalMgimo</strong></p>
+						</div>
+						<div>
+							<img
+								class="shot"
+								src="../handout/img/02-today-360px-light.png"
+								alt="Лента «Сегодня» в мобильной ширине 360 px"
+							/>
+						</div>
+					</div>
+				</section>
+
+				<!-- 5. Критерий 2: процесс -->
+				<section>
+					<div class="rule"></div>
+					<h2>ИИ в разработке: процесс в цифрах</h2>
+					<div class="three grid" style="margin-bottom: 22px">
+						<div>
+							<div class="stat">377</div>
+							<div class="stat-label">вызовов инструментов</div>
+						</div>
+						<div>
+							<div class="stat warn">12</div>
+							<div class="stat-label">провалов (3.2 %) — 6 разобраны</div>
+						</div>
+						<div>
+							<div class="stat">2.1 ч</div>
+							<div class="stat-label">две сессии агента</div>
+						</div>
+					</div>
+					<ul class="clean small">
+						<li>Агент: Cline, модель <strong>deepseek-v4-flash</strong>, режимы plan и act</li>
+						<li>Инструменты: команды, правки файлов, чтение, поиск по коду, веб-запросы</li>
+						<li>
+							Правила и скиллы: <strong>AGENTS.md</strong> с 11 готчами, узкие скиллы вместо одного
+							большого промпта
+						</li>
+						<li>
+							Гейты: тесты, типы, линт, gitleaks и проверка документов — агент не может «заявить
+							готово» без зелёного прогона
+						</li>
+					</ul>
+					<p class="tiny muted">
+						Цифры получены разбором истории сессий скриптом, а не по памяти: 377 вызовов, 12
+						провалов, 238 блоков рассуждения.
+					</p>
+				</section>
+
+				<!-- 6. Ошибки -->
+				<section>
+					<div class="rule"></div>
+					<h2>Три ошибки, которые изменили код</h2>
+					<div class="three grid">
+						<div class="card">
+							<h3>Белый экран</h3>
+							<p>
+								Селектор состояния возвращал новый массив → бесконечный ререндер. Поймали по размеру
+								скриншота: 5 293 байта = пустая страница.
+							</p>
+							<p class="ok" style="margin-top: 8px">→ правило useShallow в AGENTS.md</p>
+						</div>
+						<div class="card">
+							<h3>Контраст 4.47:1</h3>
+							<p>
+								«Почти проходит» не проходит: порог 4.5:1. axe показал точную пару цветов и вклад в
+								контраст.
+							</p>
+							<p class="ok" style="margin-top: 8px">→ токен заменён: 5.91:1</p>
+						</div>
+						<div class="card">
+							<h3>Скролл 535 px</h3>
+							<p>
+								Заявленный «0 overflow» проверили измерением: 535 px на профиле. Неявная
+								grid-колонка плюс скрытый текст вне клиппера.
+							</p>
+							<p class="ok" style="margin-top: 8px">→ 14/14 проверок: 0 px</p>
+						</div>
+					</div>
+					<p class="small muted" style="margin-top: 18px">
+						Вывод: три ошибки из шести нашли проверки, а не чтение кода. Поэтому гейты — часть
+						процесса, а не формальность.
+					</p>
+				</section>
+
+				<!-- 7. Имплементация -->
+				<section>
+					<div class="rule"></div>
+					<h2>Имплементация: каждое число с командой</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Что</th>
+								<th>Значение</th>
+								<th>Команда</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Тесты</td>
+								<td><strong>40 тестов</strong></td>
+								<td><code>yarn test</code></td>
+							</tr>
+							<tr>
+								<td>Доступность</td>
+								<td><strong>0 нарушений</strong> axe</td>
+								<td>7 экранов × 2 темы, WCAG 2.1 AA</td>
+							</tr>
+							<tr>
+								<td>Мобильность</td>
+								<td><strong>0 px</strong> горизонтального скролла</td>
+								<td>7 маршрутов × 320/360 px</td>
+							</tr>
+							<tr>
+								<td>Бандл</td>
+								<td><strong>183 КБ</strong> gzip</td>
+								<td><code>yarn build</code></td>
+							</tr>
+							<tr>
+								<td>Скриншоты</td>
+								<td><strong>20 снимков</strong></td>
+								<td><code>scripts/shoot_screens.py</code></td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="small muted" style="margin-top: 16px">
+						Правило проекта: число без команды воспроизведения не произносится. Проверка
+						автоматизирована — PDF сверяется с реестром чисел.
+					</p>
+				</section>
+
+				<!-- 8. Доступность и мобильность -->
+				<section>
+					<div class="rule"></div>
+					<h2>Доступность и мобильность</h2>
+					<div class="two grid" style="align-items: start">
+						<div>
+							<ul class="clean small">
+								<li>Контраст текста <strong>6.0:1</strong>, крупного и границ — от 3:1</li>
+								<li>Статус — всегда <strong>текст + иконка</strong>, не только цвет</li>
+								<li>Тач-таргеты от <strong>44 px</strong>, нижняя навигация — 61 px</li>
+								<li>
+									320 px — крайний случай по ГОСТ Р 52872-2019:
+									<strong>без горизонтального скролла</strong>
+								</li>
+								<li>Анимации уважают <code>prefers-reduced-motion</code></li>
+							</ul>
+						</div>
+						<div>
+							<img
+								class="shot"
+								src="../handout/img/05-requests-320px-light.png"
+								alt="Экран заявок в ширине 320 px"
+							/>
+						</div>
+					</div>
+				</section>
+
+				<!-- 9. Кто что видит -->
+				<section>
+					<div class="rule"></div>
+					<h2>Верификация ≠ контроль</h2>
+					<p class="small" style="max-width: 30em">
+						Государство подтверждает подлинность документа. Это не даёт права читать личную
+						траекторию студента.
+					</p>
+					<table style="margin-top: 18px">
+						<thead>
+							<tr>
+								<th>Данные</th>
+								<th>Студент</th>
+								<th>Преподаватель</th>
+								<th>Деканат</th>
+								<th>Гос. контур</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Заявки и справки</td>
+								<td class="ok">полностью</td>
+								<td class="muted">не видит</td>
+								<td class="ok">полностью</td>
+								<td class="muted">не видит</td>
+							</tr>
+							<tr>
+								<td>Личная траектория</td>
+								<td class="ok">полностью</td>
+								<td class="muted">не видит</td>
+								<td class="muted">не видит</td>
+								<td class="muted">не видит</td>
+							</tr>
+							<tr>
+								<td>Оценки и зачёты</td>
+								<td class="ok">полностью</td>
+								<td class="warn">частично</td>
+								<td class="ok">полностью</td>
+								<td class="warn">частично</td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="tiny muted" style="margin-top: 16px">
+						Реализовано в коде: без сессии маршрут уводит на вход; селекторы фильтруют по
+						идентификатору студента — чужая заявка не откроется даже по прямой ссылке.
+					</p>
+				</section>
+
+				<!-- 10. За пределами -->
+				<section>
+					<div class="rule"></div>
+					<h2>Что за пределами прототипа и почему</h2>
+					<div class="two grid">
+						<div class="card">
+							<h3>Не строим сейчас</h3>
+							<p>
+								ИИ-ассистент, RAG, кабинет работодателя, видеоаналитика, VR, блокчейн. Причина — нет
+								данных, согласий или оборудования.
+							</p>
+						</div>
+						<div class="card">
+							<h3>Условие запуска</h3>
+							<p>
+								У каждой отложенной идеи записано условие: интеграция с ФИС ГИА, согласия на
+								биометрию, три года данных для прогноза.
+							</p>
+						</div>
+					</div>
+					<p class="small" style="margin-top: 20px">
+						Это не «не успели», а осознанная граница: прототип не должен обещать больше, чем
+						показывает честно.
+					</p>
+					<p class="tiny muted">
+						Исключение: 152-ФЗ, процесс разработки и контекст практик — это документы, они дают
+						баллы без новых экранов.
+					</p>
+				</section>
+
+				<!-- 11. Как проверялось -->
+				<section>
+					<div class="rule"></div>
+					<h2>Как это проверялось</h2>
+					<ul class="clean small">
+						<li>
+							<strong>Тесты и типы:</strong> <code>make check</code> — линт, формат, tsc, Vitest (40
+							тестов)
+						</li>
+						<li>
+							<strong>Доступность:</strong> axe-core в браузере, 7 экранов × 2 темы, 0 нарушений
+						</li>
+						<li>
+							<strong>Мобильность:</strong> измерение <code>scrollWidth</code> против
+							<code>clientWidth</code> на 320/360 px
+						</li>
+						<li>
+							<strong>Публикация:</strong> GitHub Actions собирает статику под подпапку, deep links
+							работают после F5
+						</li>
+						<li>
+							<strong>Секреты:</strong> gitleaks в pre-commit, ключей нет ни в коде, ни в браузере
+						</li>
+					</ul>
+					<p class="small muted" style="margin-top: 18px">
+						Описание процесса — отдельный PDF: проблема, инструменты, промпты, скриншоты, вход и
+						хранение, ручные этапы.
+						<strong>digitalMgimo/handout/description.pdf</strong>
+					</p>
+				</section>
+
+				<!-- 12. Финал -->
+				<section class="cover">
+					<div class="rule"></div>
+					<h1>Спасибо</h1>
+					<p class="lead">Деканат, в который хочется заходить: один экран, честные данные,</p>
+					<p class="lead">понятный статус и уважение к приватности.</p>
+					<p class="small accent"><strong>Демо:</strong> maxbogus.github.io/digitalMgimo</p>
+					<p class="small accent"><strong>Код:</strong> github.com/maxbogus/digitalMgimo</p>
+					<p class="small accent"><strong>Описание процесса:</strong> /handout/description.pdf</p>
+					<span class="disclaimer">демо-прототип · не официальный сервис</span>
+				</section>
+			</div>
+		</div>
+
+		<script src="./vendor/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				slideNumber: 'c/t',
+				transition: 'fade',
+				transitionSpeed: 'fast',
+				controls: true,
+				progress: true,
+				center: false,
+				width: 1280,
+				height: 720,
+				margin: 0.06,
+				viewDistance: 2,
+			});
+		</script>
+	</body>
+</html>
