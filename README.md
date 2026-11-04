@@ -4,7 +4,8 @@
 Задача — не «ещё один портал», а один экран, который отвечает на вопрос
 «что сейчас?», и система, где статус заявки виден как трекинг доставки.
 
-**Демо:** два тестовых аккаунта, пароли не нужны. Все студенты и оценки вымышлены.
+**Демо:** <https://maxbogus.github.io/digitalMgimo/> — два тестовых аккаунта,
+пароли не нужны. Все студенты и оценки вымышлены.
 
 | Аккаунт       | Кто это                      |
 | ------------- | ---------------------------- |
@@ -135,13 +136,24 @@ make ci-critical     # то, что гоняет pre-push
 
 ## Деплой
 
-`make build` → `dist/` — обычная статика. Для GitHub Pages:
+Публикация автоматическая: push в `master` → GitHub Actions
+(`.github/workflows/pages.yml`) собирает статику и выкладывает её на Pages.
+
+Адрес: <https://maxbogus.github.io/digitalMgimo/> (project pages, base-path `/digitalMgimo/`).
+
+Локальная проверка сборки под подпапку:
 
 ```bash
-BASE_URL=/digitalMgimo/ make build
+BASE_URL=/digitalMgimo/ make build   # dist/ с корректными путями
 ```
 
-`public/404.html` — SPA-fallback для статических хостингов (BrowserRouter).
+Что делает сборка:
+
+- `BASE_URL` подставляет префикс во все ассеты, шрифты и `favicon`;
+- генерируется `404.html` — точная копия `index.html` (SPA-fallback для deep links);
+- создаётся `.nojekyll`, чтобы GitHub не трогал файлы Jekyll-ом.
+
+`dist/` — обычная статика, её можно положить на любой хостинг.
 
 ## Ограничения прототипа
 
